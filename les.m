@@ -10,7 +10,13 @@ Podatki
 % zaèetni inkrement je enak 1
 if zacetek == 0
 
-clear all
+%clearvars -except multip
+
+global multip;
+
+%multip = [1,1,1,1,1,1];
+
+
 
 disp(sprintf('\n *********************************************************************'))
 disp(sprintf('          FAKULTETA ZA GRADBENIŠTVO IN GEODEZIJO, Ljubljana'))
@@ -1762,5 +1768,4 @@ disp(sprintf('\n  Porabljen èas: %3.2f sek',cputime-tm))
 
 
    
-
 

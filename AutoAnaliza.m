@@ -31,7 +31,19 @@ for inloop=1:11
     
     T = table(t, u, 'VariableNames', {'cas_ure','pomik_abs'});
     
-    writetable(T, ImeDatoteke, 'Sheet', 'Pomiki');
+
+
+
+    outDir = "rezultati"; 
+
+    if ~exist(outDir, 'dir')
+        mkdir(outDir)
+    end
+    
+    fullName = fullfile(outDir, ImeDatoteke);
+    
+    writetable(T, fullName, 'Sheet', 'Pomiki');
+
 
 end
 
@@ -68,8 +80,16 @@ for loop = 2:6
         t = casA(:) / 3600/24 ; 
         
         T = table(t, u, 'VariableNames', {'cas_ure','pomik_abs'});
+            
+        outDir = "rezultati"; 
+    
+        if ~exist(outDir, 'dir')
+            mkdir(outDir)
+        end
         
-        writetable(T, ImeDatoteke, 'Sheet', 'Pomiki');
+        fullName = fullfile(outDir, ImeDatoteke);
+        
+        writetable(T, fullName, 'Sheet', 'Pomiki');
 
 
         %PLOT TABELE

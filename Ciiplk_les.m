@@ -15,6 +15,7 @@ function [c11,c12,c22,defc_pr,Nc,Mc,D_w,sigma_w,Ds_w,Dc_w,Dms_w,alfa_w,D_wp,qu_w
 
 
 
+    global multip;
 	c11=0;
 	c12=0;
 	c22=0;
@@ -65,7 +66,7 @@ function [c11,c12,c22,defc_pr,Nc,Mc,D_w,sigma_w,Ds_w,Dc_w,Dms_w,alfa_w,D_wp,qu_w
                     % raèun napetosti v integracijski toèki ob upoštevanju
                     % krèenja lesa
                     if krcenje_w==1
-                        dDs_w(m,n,i,p)=0.00625*dmoist_w(m,n,i,p);    
+                        dDs_w(m,n,i,p)=multip(1)*0.00625*dmoist_w(m,n,i,p);    
                         
                         % celotna deformacija krèenja
                         Ds_w(m,n,i,p)=Dsw(m,n,i,p)+dDs_w(m,n,i,p);
@@ -83,8 +84,8 @@ function [c11,c12,c22,defc_pr,Nc,Mc,D_w,sigma_w,Ds_w,Dc_w,Dms_w,alfa_w,D_wp,qu_w
                                 if inkrement==1
                                    dDc_w(m,n,i,p)=0;  %dDc_w(m,n,i,p)=0.9927e-4;                
                                 else
-                                    alf1_T=-0.2719e-4;
-                                    alf2_T=1.975e-2;
+                                    alf1_T=multip(4)*-0.2719e-4;
+                                    alf2_T=multip(5)*1.975e-2;
 %                                       alf1_T=-1.83e-3;
 %                                     alf2_T=2.35e-2;
                                     dDc_w(m,n,i,p)=sigmaw(m,n,i,p)*(alf1_T)*(exp(-alf2_T*cas(inkrement)/86400)-exp(-alf2_T*cas(inkrement-1)/86400));  
@@ -97,11 +98,11 @@ function [c11,c12,c22,defc_pr,Nc,Mc,D_w,sigma_w,Ds_w,Dc_w,Dms_w,alfa_w,D_wp,qu_w
                                 if inkrement==1
                                  dDc_w(m,n,i,p)=0;    %dDc_w(m,n,i,p)=1.0080e-4;    
                                 else    
-                                    alf1_C=-0.1850e-4;
-                                    alf2_C=2.017e-2;
+                                    alf1_C=multip(2)*-0.1850e-4;
+                                    alf2_C=multip(3)*2.017e-2;
 %                                     alf1_C=-1.225e-3;
 %                                     alf2_C=2.4e-2;
-                                    dDc_w(m,n,i,p)=sigmaw(m,n,i,p)*(alf1_C)*(exp(-alf2_C*cas(inkrement)/86400)-exp(-alf2_C*cas(inkrement-1)/86400));  
+                                    dDc_w(m,n,i,p)=sigmaw(m,n,i,p)*(alf1_C)*(exp(-alf2_C*cas(inkrement)/86400)-exp(-alf2_C*cas(inkrement-1)/86400)); 
 %                                     dDc_w(m,n,i,p)=sigmaw(m,n,i,p)*(-1.225e-3)*(exp(-2.399974684e-1*cas(inkrement)/86400)-exp(-2.399974684e-1*cas(inkrement-1)/86400));  
 %                                     dDc_w(m,n,i,p)=sigmaw(m,n,i,p)*(-1.224935638e-3)*(exp(-2.399974684e-1*cas(inkrement)/86400)-exp(-2.399974684e-1*cas(inkrement-1)/86400));  
 %                                     dDc_w(m,n,i,p)=sigmaw(m,n,i,p)*(-0.95577e-4)*(exp(-2.07277e-1*cas(inkrement)/86400)-exp(-2.0e-1*cas(inkrement-1)/86400));  
@@ -128,9 +129,9 @@ function [c11,c12,c22,defc_pr,Nc,Mc,D_w,sigma_w,Ds_w,Dc_w,Dms_w,alfa_w,D_wp,qu_w
                     % mehano-sorptivne deformacije lesa
                     if mehso_w==1
                         if dmoist_w(m,n,i,p) >= 0 % pozitivna sprememba vlage v èasovnem inkrementu
-                            dDms_w(m,n,i,p)=sigmaw(m,n,i,p)*0.00003*(1-exp(-1.6*abs(dmoist_w(m,n,i,p))));
+                            dDms_w(m,n,i,p)=multip(6)*sigmaw(m,n,i,p)*0.00003*(1-exp(-1.6*abs(dmoist_w(m,n,i,p))));
                         else % vlaga se zmanjša
-                            dDms_w(m,n,i,p)=sigmaw(m,n,i,p)*0.00003*(1-exp(-2.4*abs(dmoist_w(m,n,i,p))));
+                            dDms_w(m,n,i,p)=multip(6)*sigmaw(m,n,i,p)*0.00003*(1-exp(-2.4*abs(dmoist_w(m,n,i,p))));
                         end    
                         % celotna mehano-sorptivna deformacija
                         Dms_w(m,n,i,p)=Dmsw(m,n,i,p)+dDms_w(m,n,i,p);

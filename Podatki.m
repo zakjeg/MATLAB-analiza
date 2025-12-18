@@ -191,7 +191,7 @@ zacetek=0;
 % st_korakov=24*3600*192/(3600*4)+1;
 
 %ZMANJSANO ST KORAKOV ZA TEST
-st_korakov=20;
+st_korakov=25;
 
 % èasovni prirastek
 ink_cas=4*3600;  %v sekundah
