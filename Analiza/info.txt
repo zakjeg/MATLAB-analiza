@@ -1,0 +1,27 @@
+// to je biu pa v1, plotanje direktno na grafek
+
+
+
+>> Ru_konstGKSA(8*3+5*3-1,2:end)'
+
+>> W5=Ru_konstGKSA(8*3+5*3-1,2:end);
+
+>> plot(casA/60/24,W5)
+
+>> plot(casA/60/24,abs(W5))
+
+>> plot(casA/3600/24,abs(W5))
+
+
+
+ 
+// to je zdj laufala..
+
+
+u = abs(Ru_konstGKSA(8*3+5*3-1, 2:end).');
+
+ t = casA(:) / 3600/24 ; 
+
+T = table(t, u, 'VariableNames', {'cas_ure','pomik_abs'});
+
+writetable(T, 'rezultativ10.xlsx', 'Sheet', 'Pomiki');
